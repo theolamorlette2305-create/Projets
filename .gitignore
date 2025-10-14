@@ -1,0 +1,13 @@
+# Dossiers générés par Unity à ignorer
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Fichiers de Visual Studio
+.vs/
+*.csproj
+*.sln
