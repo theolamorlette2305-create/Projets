@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultat - Accessibilité Vidéo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { color: #2563eb; }
+        
+        .error-box {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f87171;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #000;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #64748b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover { background-color: #475569; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        {% if error %}
+            <h1>Oups ! Un problème est survenu.</h1>
+            <div class="error-box">
+                {{ error }}
+            </div>
+            <a href="/" class="back-btn">Réessayer</a>
+
+        {% else %}
+            <h1>✅ Vidéo Prête !</h1>
+            <div class="summary">Filtres appliqués : {{ options }}</div>
+            
+            <video controls>
+                <source src="{{ url_for('static', filename=video_file) }}" type="video/mp4">
+                Votre navigateur ne supporte pas la balise vidéo.
+            </video>
+            <br>
+            <a href="/" class="back-btn">Traiter une autre vidéo</a>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
