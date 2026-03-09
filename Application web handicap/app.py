@@ -7,13 +7,12 @@ import torch
 
 app = Flask(__name__)
 
-# Dossier pour stocker les fichiers temporaires
 OUTPUT_FOLDER = 'static'
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 @app.route('/')
 def home():
-    # On renvoie vers le fichier HTML au lieu d'une chaîne de caractères
+    
     return render_template('index.html')
 
 @app.route('/process', methods=['POST'])
@@ -27,7 +26,6 @@ def process_video():
     subtitle_file = os.path.join(OUTPUT_FOLDER, "subtitles.srt")
     output_video = os.path.join(OUTPUT_FOLDER, "output_accessible.mp4")
 
-    # --- 1. TÉLÉCHARGEMENT ---
     print("1. Téléchargement...")
     try:
         current_folder = os.path.dirname(os.path.abspath(__file__))
@@ -89,13 +87,11 @@ def process_video():
     print("Exécution FFmpeg...")
     subprocess.run(cmd)
 
-    # On prépare le résumé des options pour l'affichage
     options_summary = []
     if want_subtitles: options_summary.append("Sous-titres contrastés")
     if want_audio_boost: options_summary.append("Clarté vocale")
     if not options_summary: options_summary.append("Aucune modification (Copie originale)")
 
-    # On passe les données à la page de résultat
     return render_template('result.html', video_file="output_accessible.mp4", options=", ".join(options_summary))
 
 def format_timestamp(seconds):
